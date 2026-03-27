@@ -5,6 +5,7 @@ import { SCBSheet } from './components/SCBSheet';
 import { DynamicSheet } from './components/DynamicSheet';
 import type { ColumnDef } from './components/DynamicSheet';
 import { Download, ChevronRight, ChevronLeft } from 'lucide-react';
+import { exportToExcel } from './exportToExcel';
 
 const SHEETS = [
   { id: 'master', name: 'Locations' },
@@ -100,29 +101,10 @@ function App() {
     return canProceedLoc && canProceedInv;
   };
 
-  const handleExport = async () => {
+  const handleExport = () => {
     setExporting(true);
     try {
-      const payload = { formData: formState };
-      const res = await fetch('http://localhost:3000/api/export', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error('Export failed');
-      
-      const fileName = formState.siteName 
-        ? `${formState.siteName.replace(/[^a-zA-Z0-9_\- ]/g, '')}_Asset_Config_${Date.now()}.xlsx`
-        : `Asset_Config_${Date.now()}.xlsx`;
-      
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
+      exportToExcel(formState);
     } catch (err) {
       alert('Error exporting Excel');
       console.error(err);
