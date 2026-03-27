@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from './FormContext';
 import { MasterLocations } from './components/MasterLocations';
 import { SCBSheet } from './components/SCBSheet';
 import { DynamicSheet } from './components/DynamicSheet';
 import type { ColumnDef } from './components/DynamicSheet';
-import { Download, ChevronRight, ChevronLeft, CheckCircle } from 'lucide-react';
+import { Download, ChevronRight, ChevronLeft } from 'lucide-react';
 
 const SHEETS = [
   { id: 'master', name: 'Locations' },
