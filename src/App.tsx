@@ -30,7 +30,7 @@ const COLUMNS_DEF: Record<string, ColumnDef[]> = {
     { key: 'commissioningDate', label: 'Commissioning Date', type: 'date' },
     { key: 'latitude', label: 'Latitude', type: 'text' },
     { key: 'longitude', label: 'Longitude', type: 'text' },
-    { key: 'status', label: 'Status', type: 'text' },
+    { key: 'status', label: 'Status', type: 'select', options: ['Active', 'Inactive'] },
     { key: 'dcCapacity', label: 'DC Capacity (KWp)', type: 'number', required: true },
     { key: 'acCapacity', label: 'AC Capacity (KW)', type: 'number' },
     { key: 'totalModules', label: 'Total Modules', type: 'number' }
